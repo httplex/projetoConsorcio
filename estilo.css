@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilização Menu */
+nav{
+    display:inline-block;
+    align-items: center;
+    background-color:  rgb(209, 223, 240);
+    border-radius: 10px;
+    height: 80px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: solid;
+    font-weight: bold;
+    box-shadow: 0 0 8px 1px #010168;
+}
+
+.teste3{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0;
+    
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+}
+
+li{
+    display: flex;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+.img-1{
+    display: inline-flex;
+    margin-top: 5px;
+    align-items: center;
+    margin-left: 10px;
+    background-color: rgb(209, 223, 240);
+    background-size: 100px 100px;
+    
+}
+
+/* Estilização Botão */
+.botao{
+    background-color: #02028b;
+    color: white;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    text-shadow: none;
+    margin-top: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: solid;
+    font-weight: bold;
+    width: 200px;
+    height: 40px;
+}
+
+button{
+    @include center;
+    background: #333;
+    color: #ccc;
+    width: 200px;
+    height: 60px;
+    border: 0;
+    font-size: 18px;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+    transition: .6s;
+    overflow: hidden;
+    &:focus{
+      outline: 0;
+    }
+    &:before{
+      content: '';
+      display: block;
+      position: absolute;
+      background: rgba(255,255,255,0.5);
+      width: 60px;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: .5;
+      filter: blur(30px);
+      transform: translateX(-100px)  skewX(-15deg);
+    }
+    &:after{
+      content: '';
+      display: block;
+      position: absolute;
+      background: rgba(255,255,255,0.2);
+      width: 30px;
+      height: 100%;
+      left: 30px;
+      top: 0;
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateX(-100px) skewX(-15deg);
+    }
+    &:hover{
+      background: #4a5f90;
+      cursor: pointer;
+      &:before{
+        transform: translateX(300px)  skewX(-15deg);  
+        opacity: 0.6;
+        transition: .7s;
+      }
+      &:after{
+        transform: translateX(300px) skewX(-15deg);  
+        opacity: 1;
+        transition: .7s;
+      }
+    }
+  }
+
