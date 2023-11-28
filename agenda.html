@@ -33,9 +33,9 @@
         <tbody id="tabela"> 
         </tbody>
     </table>
+        <button class="btn btn-primary position-absolute top-50 start-50 translate-middle">Gerar Relatório</button>
     </div>
     
-
     <div id="modalAdicionar" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -165,7 +165,7 @@
             fetch('http://localhost:5000/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(contato)
+                body: JSON.stringify(cliente)
             }).then(() => {
                 buscarContatos()
             })
