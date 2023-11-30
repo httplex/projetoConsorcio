@@ -33,7 +33,9 @@
         <tbody id="tabela"> 
         </tbody>
     </table>
-        <button class="btn btn-primary position-absolute top-50 start-50 translate-middle">Gerar Relatório</button>
+    <div>
+       </div>
+        
     </div>
     
     <div id="modalAdicionar" class="modal" tabindex="-1">
@@ -153,13 +155,13 @@
         function adicionarContato(event) {
             event.preventDefault()
 
-            let codigo = document.getElementById('codigoCreate').value
-            let nome = document.getElementById('nomeCreate').value
-            let cargo = document.getElementById('cargoCreate').value
-            let venda = document.getElementById('vendaCreate').value
-            let valor = document.getElementById('valorCreate').value
+            let codVendedor = document.getElementById('codigoCreate').value
+            let nomeVendedor = document.getElementById('nomeCreate').value
+            let cargoVendedor = document.getElementById('cargoCreate').value
+            let codVenda = document.getElementById('vendaCreate').value
+            let valorVenda = document.getElementById('valorCreate').value
 
-            const cliente = { codigo, nome, cargo, venda, valor }
+            const cliente = { codVendedor, nomeVendedor, cargoVendedor, codVenda, valorVenda }
             clientes.push(cliente)
 
             fetch('http://localhost:5000/create', {
@@ -178,11 +180,11 @@
             const cliente = clientes[index]
             toogleModal(modalEditar)
 
-            document.getElementById('codigoUpdate').value = cliente.codigo
-            document.getElementById('nomeUpdate').value = cliente.nome
-            document.getElementById('cargoUpdate').value = cliente.cargo
-            document.getElementById('vendaUpdate').value = cliente.venda
-            document.getElementById('valorUpdate').value = cliente.valor
+            document.getElementById('codigoUpdate').value = cliente.codVendedor
+            document.getElementById('nomeUpdate').value = cliente.nomeVendedor
+            document.getElementById('cargoUpdate').value = cliente.cargoVendedor
+            document.getElementById('vendaUpdate').value = cliente.codVenda
+            document.getElementById('valorUpdate').value = cliente.valorVenda
 
             formUpdate.addEventListener('submit', function(event){
                 event.preventDefault()
@@ -212,11 +214,11 @@
             clientes.forEach((cliente, index) => {
                 tabela.innerHTML += `
                     <tr>
-                        <td>${cliente.codigo}</td>
-                        <td>${cliente.nome}</td>
-                        <td>${cliente.cargo}</td>
-                        <td>${cliente.venda}</td>
-                        <td>${cliente.valor}</td>
+                        <td>${cliente.codVenda}</td>
+                        <td>${cliente.nomeVendedor}</td>
+                        <td>${cliente.cargoVendedor}</td>
+                        <td>${cliente.codVenda}</td>
+                        <td>${cliente.valorVenda}</td>
                         <td>
                             <button class="btn btn-primary" onclick="editarContato(${index})">Editar</button>    
                             <button class="btn btn-danger" onclick="apagarContato(${index})">Apagar</button>    

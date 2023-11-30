@@ -5,9 +5,23 @@ let clientes = [
     {codigo: 0o4, nome: 'Maria Cardozo Alves', cargo: 'Sênior', venda: 0o5, valor: 'R$ 235.000,00'}
 ]
 
+//teste conexão com o banco (DEU CERTO)
+
+const sqlite3 = require('sqlite3');
+
+const db = new sqlite3.Database('./database.sqlite');
+
 function obterClientes(req, res) {
-    res.statusCode = 200
-    res.end(JSON.stringify(clientes))
+  db.all('SELECT * FROM empresa', (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: 'Erro ao obter dados da tabela' }));
+      return;
+    }
+    res.statusCode = 200;
+    res.end(JSON.stringify(rows));
+  });
 }
 
 function adicionarCliente(req, res) {
