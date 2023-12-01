@@ -1,12 +1,6 @@
 const http = require('http')
 
-let clientes = [
-    {codigo: 0o3, nome: 'Laura Alves', cargo: 'Sênior', venda: 0o1, valor: 'R$ 2.235.000,00'},
-    {codigo: 0o4, nome: 'Maria Cardozo Alves', cargo: 'Sênior', venda: 0o5, valor: 'R$ 235.000,00'}
-]
-
-//teste conexão com o banco (DEU CERTO)
-
+//CONEXÃO com o banco (DEU CERTO)
 const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database('./database.sqlite');
@@ -24,19 +18,28 @@ function obterClientes(req, res) {
   });
 }
 
+//ADICIONAR CLIENTE DEU CERTO
 function adicionarCliente(req, res) {
-    let body = ''
+    let body = '';
     req.on('data', chunk => {
-        body += chunk.toString()
-    })
+        body += chunk.toString();
+    });
     req.on('end', () => {
-        let cliente = JSON.parse(body)
-        clientes.push(cliente)
-        res.statusCode = 200
-        res.end(JSON.stringify(cliente))
-    })
+        let cliente = JSON.parse(body);
+        db.run('INSERT INTO empresa (codVendedor, nomeVendedor, cargoVendedor, codVenda, valorVenda) VALUES (?, ?, ?, ?, ?)', [cliente.codVendedor, cliente.nomeVendedor, cliente.cargoVendedor, cliente.codVenda, cliente.valorVenda], function(err) {
+            if (err) {
+                console.error(err.message);
+                res.statusCode = 500;
+                res.end(JSON.stringify({ error: 'Erro ao adicionar cliente ao banco de dados' }));
+                return;
+            }
+            res.statusCode = 200;
+            res.end(JSON.stringify(cliente));
+        });
+    });
 }
 
+//Atualizar os dados da pessoa
 function atualizarCliente(req, res) {
     const nomeParaProcurar = req.url.split('/')[2]
     let body = ''
@@ -56,6 +59,7 @@ function atualizarCliente(req, res) {
     })
 }
 
+//apagar o item
 function apagarCliente(req, res) {
     const nomeParaProcurar = req.url.split('/')[2]
     const index = clientes.findIndex(cliente => cliente.nome === nomeParaProcurar)

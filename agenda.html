@@ -49,7 +49,7 @@
                     <form id="formCreate">
                         <div class="mb-1">
                             <label for="codigoCreate" class="form-label">Código do Vendedor</label>
-                            <input type="number" class="form-control" id="codigoCreate">
+                            <input type="text" class="form-control" id="codigoCreate">
                         </div>
                         <div class="mb-1">
                             <label for="nomeCreate" class="form-label">Nome</label>
@@ -61,11 +61,11 @@
                         </div>
                         <div class="mb-1">
                             <label for="vendaCreate" class="form-label">Código da Venda</label>
-                            <input type="number" class="form-control" id="vendaCreate">
+                            <input type="text" class="form-control" id="vendaCreate">
                         </div>
                         <div class="mb-1">
                             <label for="valorCreate" class="form-label">Valor da Venda</label>
-                            <input type="text" class="form-control" id="valorCreate">
+                            <input type="number" class="form-control" id="valorCreate">
                         </div>
                         <div class="text-end">
                             <button id="btnAdicionarSalvar" type="submit" class="btn btn-primary mt-3">Salvar</button>
@@ -152,6 +152,7 @@
             overlay.style.display = isAparente ? 'none' : 'block'
         }
 
+        //FUNCIONANDO!!!
         function adicionarContato(event) {
             event.preventDefault()
 
@@ -175,7 +176,7 @@
         }
 
 
-
+/*
         function editarContato(index){
             const cliente = clientes[index]
             toogleModal(modalEditar)
@@ -199,7 +200,7 @@
                 renderizarTabela()
             })
         }
-
+*/
         function apagarContato(index){
             const apagar = confirm('Você deseja apagar esse contato?')
             if(apagar){
@@ -228,20 +229,21 @@
             })
         }
 
-        function buscarContatos(){  //fetch faz uma promessa
-            fetch('http://localhost:5000/api')
-                .then(response => response.json())
-                .then(dados => {
-                    clientes = dados
-                    renderizarTabela()
-                })
-        }        
+        function buscarContatos() {
+        fetch('http://localhost:5000/api')
+        .then(response => response.json())
+        .then(dados => {
+            clientes = dados;
+            renderizarTabela();
+        })
+        .catch(error => console.error('Erro ao buscar contatos:', error));
+}  
         
 
 
         btnAdicionar.addEventListener('click', () => toogleModal(modalAdicionar))
         btnAdicionarClose.addEventListener('click', () => toogleModal(modalAdicionar))
-        btnAdicionarSalvar.addEventListener('click', () => toogleModal(modalAdicionar))
+        btnAdicionarSalvar.addEventListener('click', adicionarContato);
         formCreate.addEventListener('submit', adicionarContato)
         
         btnEditarClose.addEventListener('click', () => toogleModal(modalEditar))
