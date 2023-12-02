@@ -6,16 +6,16 @@ const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database('./database.sqlite');
 
 function obterClientes(req, res) {
-  db.all('SELECT * FROM empresa', (err, rows) => {
-    if (err) {
-      console.error(err.message);
-      res.statusCode = 500;
-      res.end(JSON.stringify({ error: 'Erro ao obter dados da tabela' }));
-      return;
-    }
-    res.statusCode = 200;
-    res.end(JSON.stringify(rows));
-  });
+    db.all('SELECT * FROM empresa', (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Erro ao obter dados da tabela' }));
+            return;
+        }
+        res.statusCode = 200;
+        res.end(JSON.stringify(rows));
+    });
 }
 
 //ADICIONAR CLIENTE DEU CERTO
@@ -26,7 +26,7 @@ function adicionarCliente(req, res) {
     });
     req.on('end', () => {
         let cliente = JSON.parse(body);
-        db.run('INSERT INTO empresa (codVendedor, nomeVendedor, cargoVendedor, codVenda, valorVenda) VALUES (?, ?, ?, ?, ?)', [cliente.codVendedor, cliente.nomeVendedor, cliente.cargoVendedor, cliente.codVenda, cliente.valorVenda], function(err) {
+        db.run('INSERT INTO empresa (codVendedor, nomeVendedor, cargoVendedor, codVenda, valorVenda) VALUES (?, ?, ?, ?, ?)', [cliente.codVendedor, cliente.nomeVendedor, cliente.cargoVendedor, cliente.codVenda, cliente.valorVenda], function (err) {
             if (err) {
                 console.error(err.message);
                 res.statusCode = 500;
@@ -39,39 +39,47 @@ function adicionarCliente(req, res) {
     });
 }
 
-//Atualizar os dados da pessoa
+//Atualizar os dados da pessoa DEU CERTO
 function atualizarCliente(req, res) {
-    const nomeParaProcurar = req.url.split('/')[2]
-    let body = ''
+    const idParaProcurar = req.url.split('/')[2];
+    let body = '';
     req.on('data', chunk => {
-        body += chunk.toString()
-    })
+        body += chunk.toString();
+    });
     req.on('end', () => {
-        const index = clientes.findIndex(cliente => cliente.nome === nomeParaProcurar)
-        if (index > -1) {
-            clientes[index] = JSON.parse(body);
-            res.statusCode = 200
-            res.end(JSON.stringify(clientes[index]))
-        } else {
-            res.statusCode = 404
-            res.end(JSON.stringify({ mensagem: "rota não encontrada" }))
-        }
-    })
+        const sql = 'UPDATE empresa SET codVendedor = ?, nomeVendedor = ?, cargoVendedor = ?, codVenda = ?, valorVenda = ? WHERE id = ?';
+        const clienteAtualizado = JSON.parse(body);
+        db.run(sql, [clienteAtualizado.codVendedor, clienteAtualizado.nomeVendedor, clienteAtualizado.cargoVendedor, clienteAtualizado.codVenda, clienteAtualizado.valorVenda, idParaProcurar], function (err) {
+            if (err) {
+                console.error(err.message);
+                res.statusCode = 500;
+                res.end(JSON.stringify({ error: 'Erro ao atualizar cliente no banco de dados' }));
+                return;
+            }
+            res.statusCode = 200;
+            res.end(JSON.stringify(clienteAtualizado));
+        });
+    });
 }
 
-//apagar o item
+//Apagar o item DEU CERTO
 function apagarCliente(req, res) {
-    const nomeParaProcurar = req.url.split('/')[2]
-    const index = clientes.findIndex(cliente => cliente.nome === nomeParaProcurar)
-    if (index > -1) {
-        clientes.splice(index, 1);
-        res.statusCode = 200
-        res.end(JSON.stringify({ mensagem: "apagado com sucesso" }))
-    } else {
-        res.statusCode = 404
-        res.end(JSON.stringify({ mensagem: "rota não encontrada" }))
-    }
+    const idParaProcurar = req.url.split('/')[2];
+    const sql = 'DELETE FROM empresa WHERE id = ?';
+
+    db.run(sql, [idParaProcurar], function (err) {
+        if (err) {
+            console.error(err.message);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Erro ao apagar cliente do banco de dados' }));
+            return;
+        }
+
+        res.statusCode = 200;
+        res.end(JSON.stringify({ mensagem: 'Cliente apagado com sucesso' }));
+    });
 }
+
 
 const servidorWEB = http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -93,7 +101,7 @@ const servidorWEB = http.createServer(function (req, res) {
     } else if (req.url.startsWith('/update/') && req.method === 'PUT') {
         atualizarCliente(req, res)
     } else if (req.url.startsWith('/delete/') && req.method === 'DELETE') {
-        apagarCliente(req,res)
+        apagarCliente(req, res)
     } else {
         res.statusCode = 404
         res.end(JSON.stringify({ mensagem: "rota não encontrada" }))
