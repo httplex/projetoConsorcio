@@ -9,7 +9,7 @@ nav{
     align-items: center;
     background-color:  rgb(209, 223, 240);
     border-radius: 10px;
-    height: 80px;
+    height: 90px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-decoration: solid;
     font-weight: bold;
@@ -117,3 +117,41 @@ button{
     }
   }
 
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.bgimage {
+    height: 100vh;
+    position: relative;
+    background: url('imagem/inicio.jpg');
+    background-size: cover;
+}
+
+
+#sobre, 
+#servicos, 
+#portfolio, 
+#contato {
+    padding: 5rem 0;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  margin-top: 280px;
+  margin-left: 35px;
+  color: #02268b;
+  text-decoration: solid;
+}
+
+.heroDesc {
+  font-size: 1.7rem;
+  margin-left: 40px;
+  margin-top: 5px;
+}
+
+.aboutImage {
+  width: 100%;
+}
