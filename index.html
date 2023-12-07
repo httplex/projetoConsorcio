@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,85 +8,179 @@
     <!-- Arquico CSS -->
     <link rel="stylesheet" href="estilo.css">
 
-     <!-- Arquivo JavaScript-->
-     <script src="script.js"></script>
+    <!-- Arquivo JavaScript-->
+    <script src="script.js"></script>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 
     <title>Consórcios LTDA</title>
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg fixed-top navbarScroll">
-            <div class="container">
-                <div class="teste3">
-                    <img class="img-1" src="imagem/shy.png" alt="logo da empresa" width="140px" height="65px">
-                </div>
-                    
-                <div class="teste">
-                    <ul>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#inicio">Início</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#sobre">Sobre Nós</a>
-                        </li>
-                        <li>Depoimentos</li>
-                        <li>Produtos</li>
-                        <a href="agenda.html"><button class="botao">Relatório de Vendas</button></a>
-                    </ul>
-                </div>
+    <!--Menu-->
+    <nav class="navbar navbar-expand-lg fixed-top navbarScroll">
+        <div class="container">
+            <div class="teste3">
+                <img class="img-1" src="imagem/shy.png" alt="logo da empresa" width="140px" height="65px">
             </div>
-        </nav>
 
-        <section class="bgimage" id="inicio">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="glass">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 heroText">
+            <div class>
+                <ul class="menu">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#inicio">Início</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#sobre">Sobre Nós</a>
+                    </li>
+                    <li class="produtos">
+                        <a href="nav-item">Produtosㅤ</a>
+                        <ul class="testando">
+                            <li><a href="">Consórcio de Imóveis</a></li>
+                            <li><a href="">Consórcio de Veículos</a></li>
+                            <li><a href="">Consórcio de serviços</a></li>
+                            <li><a href="">Ajuda com crédito</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="nav-link" href="#depoimentos">Depoimentos</a>
+                    </li>
+                    <button id="btnAdicionar" class="botao">Área do cliente</button>
+
+                    <div id="modalAdicionar" class="modal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Faça seu login no sistema!</h5>
+                                    <button type="button" id="btnAdicionarClose" class="btn-close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="formCreate">
+                                        <div class="mb-1">
+                                            <label for="userCreate" class="form-label">Seu Usuário:</label>
+                                            <input type="text" class="form-control" id="userCreate" placeholder="Seu CPF">
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="senhaCreate" class="form-label">Senha</label>
+                                            <input type="password" class="form-control" id="senhaCreate">
+                                        </div>
+
+                                        <div class="text-end">
+                                            <button id="btnAdicionarSalvar" type="submit" class="btn btn-primary mt-3">Login</button>
+                                        </div>
+
+                                        <h5 class="modal-title">Ainda não é nosso cliente? Venha sonhar com a gente!</h5>
+                                        
+                                        <div class="text-end">
+                                            <button id="btnAdicionarSalvar" type="submit" class="btn btn-primary mt-3">Cadastro de Cliente</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+    <div id="overlay" style="
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgb(0, 0, 0, 0.5);
+        display: none;
+        ">
+    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Banner-->
+    <section class="bgimage" id="inicio">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="glass">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 heroText">
                         <h1 class="heroTitle">Realize!</h1>
                         <p class="heroDesc">Seu sonho é nossa prioridade.</p>
                     </div>
-                </div>      
                 </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-
-    <section id="sobre">
-        <div class="container mt-4 pt-4">
-            <h2 class="text-center">Sobre Nós</h2>
-            <div class="row mt-4">
-            <!-- Imagem Sobre Mim-->
-            <div class="col-lg-4">
-                <img src="imagem/oxe.png" alt="foto funcionários" class="aboutImage">
-            </div>
-            
-            <!--Informações Sobre Mim-->
-            <div class="col-lg-8">
-                <p>
-                Nossa empresa tem como principal objetivo oferecer uma alternativa acessível e flexível aos nossos clientes que desejam realizar aquisição de bens ou serviços desejados.
-                Gostaríamos de proporcionar aos nossos participantes a oportunidade de adquirir e viver seus próprios sonhos da melhor forma.
-                </p>
-
-                <p>
-                Buscamos estabelecer uma relação sólida com nossos clientes, baseada na ética, na responsabilidade e na honestidade. Temos objetivo de proporcionar uma jornada financeira segura e eficiente, 
-                garantindo que os participantes atinjam seus sonhos e metas de vida de maneira sustentável.
-                </p>
-                
-                <!-- Parágrafo +infos-->
-                <div class="row-mt-3">
-                    <p>
-                        Há quase dez anos no mercado, fundada em 2014, a Consórcios LTDA tenta e consegue fazer o melhor sempre.
-                        Premiada em 2020 como a empresa com
-                    </p>
-                </div>
-            </div>
             </div>
         </div>
     </section>
+
+    <section>
+        <div class="container mt-4 pt-4">
+            <h2 class="text-right">Você sabe como funciona um consórcio?</h2>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre">
+        <div class="container mt-4 pt-4">
+            <h2 class="text-center">Sobre a nossa empresa...</h2>
+            <div class="row mt-4">
+
+                <!-- Imagem Sobre a Empresa-->
+                <div class="col-lg-4">
+                    <img src="imagem/oxe.png" alt="foto funcionários" class="aboutImage">
+                </div>
+
+                <!--Informações Sobre a Empresa-->
+                <div class="col-lg-8">
+                    <p>
+                        Nossa empresa tem como principal objetivo oferecer uma alternativa acessível e flexível aos
+                        nossos clientes que desejam realizar aquisição de bens ou serviços desejados.
+                        Gostaríamos de proporcionar aos nossos participantes a oportunidade de adquirir e viver seus
+                        próprios sonhos da melhor forma.
+                    </p>
+
+                    <p>
+                        Buscamos estabelecer uma relação sólida com nossos clientes, baseada na ética, na
+                        responsabilidade e na honestidade. Temos objetivo de proporcionar uma jornada financeira segura
+                        e eficiente,
+                        garantindo que os participantes atinjam seus sonhos e metas de vida de maneira sustentável.
+                    </p>
+
+                    <!-- Parágrafo +infos-->
+                    <div class="row-mt-3">
+                        <p>
+                            Há quase dez anos no mercado, fundada em 2014, a Consórcios LTDA tenta e consegue fazer o
+                            melhor sempre.
+                            Premiada em 2020 como a empresa com o melhor atendimento ao cliente e em 2022 como uma das
+                            melhores no ramo de consórcios.
+                            A Consórcios LTDA é o que você procura, venha fazer parte de algo único.
+                        </p>
+                        <p>Confira abaixo o nosso relatório de vendas!</p>
+                    </div> <a href="agenda.html"><button class="botao2">Relatório de Vendas</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+    </section>
+
+    <script>
+        const btnAdicionar = document.getElementById('btnAdicionar')
+        const btnAdicionarClose = document.getElementById('btnAdicionarClose')
+
+        function toogleModal(modal) {
+            const isAparente = modal.style.display === 'block'
+
+            modal.style.display = isAparente ? 'none' : 'block'
+            overlay.style.display = isAparente ? 'none' : 'block'
+        }
+
+        btnAdicionar.addEventListener('click', () => toogleModal(modalAdicionar))
+        btnAdicionarClose.addEventListener('click', () => toogleModal(modalAdicionar))
+    </script>
 </body>
 </html>
