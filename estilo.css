@@ -30,19 +30,34 @@ nav{
   }
   
   .menu li a{
-  color:black; 
-  text-decoration:none; 
-  padding:5px 10px; 
-  display:flex;
-  align-items: center;
-  width: 100%;
-  white-space: nowrap;
+    position: relative;
+    text-decoration: none;
+    color: black;
+    padding:5px 10px; 
+    display:flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
+
+.menu li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px; 
+  background-color: #010168; 
+  transition: width 0.3s ease; 
+}
+
+.menu li:hover a::after {
+  width: 100%;
+}
+
+
 .menu li a:hover{
-background:#010168;
 border-radius: 10px;
-color:#fff;
 }
 
 .testando{
@@ -51,28 +66,17 @@ color:#fff;
   width: 210px;
 }
 
-.menu li.produtos:hover > a {
-  background: #010168;
-  color: #fff;
-  border-radius: 10px;
+.menu li.produtos:hover a::after {
+  width: 100%;
 }
 
-.menu li.produtos > a::after {
-  content: '▼'; /* Seta para baixo por padrão */
-  position: absolute;
-  left: 95px;
-  transition: transform 0.3s ease; /* Adiciona uma transição suave */
-}
 
-.menu li.produtos:hover > a::after {
-  transform: rotate(180deg); /* Gira a seta para cima ao passar o mouse */
-}
 
 .menu li ul{
   position:absolute;
-  top:50px;
+  top:55px;
   left:10;
-  background-color:rgb(209, 223, 240);;
+  background-color:white;
   display:none;
   text-align: center;
   border-radius: 10px;
@@ -219,6 +223,7 @@ button{
 #portfolio, 
 #contato {
     padding: 5rem 0;
+    background-color: #dbdbdb;
 }
 
 .heroTitle {
@@ -237,8 +242,152 @@ button{
   font-size: 1.7rem;
   margin-left: 40px;
   margin-top: 5px;
+  font-weight: bold;
 }
 
 .aboutImage {
   width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/**/
+.servicesText.card {
+  height: 450px;
+  cursor: pointer;
+  padding: 0 2rem;
+}
+
+.servicesIcon {
+  height: 36px;
+  text-align: center;
+  width: 100%;
+}
+
+.cardTitle {
+  text-align: center;
+}
+
+.card:hover .servicesIcon {
+  color: #008000;
+}
+
+.servicesText:hover{
+  border: 1px solid #008000;
+}
+
+.contactIcon{
+  font-size: 2.5rem;
+  color: #3457f5;
+}
+
+/* Footer */
+footer {
+  background-color: #010030;
+  
+}
+.footerIcon {
+  font-size: 2rem;
+  color: white;
+}
+.footerIcon:hover {
+  color: #c4c4c4;
+}
+.footerDev {
+  background-color: #001f63;
+}
+
+
+/* FORM */
+
+.modal {
+  color: black; 
+  text-align: start;
+  margin-top: 50px;
+}
+
+.modal-header {
+  background-color: rgb(73, 106, 214); /* Azul claro para o cabeçalho */
+  color: #ffffff; /* Texto branco para o cabeçalho */
+}
+
+.modal label, .modal input {
+  color: black; 
+}
+
+/* Estilo para os botões dentro do modal */
+.modal .btn-login {
+  background-color: #010168; 
+  color: #ffffff; 
+  padding: 2px 2px; 
+  font-size: 15px; 
+  width: 90px;
+  height: 40px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.modal .btn-cadastro {
+  background-color: orangered; 
+  color: white; 
+  padding: 2px 2px; 
+  font-size: 15px; 
+  width: 160px;
+  height: 40px;
+  margin-right: 33%;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.modal .btn-login:hover {
+  background-color: #2c3e50; 
+  color: white;
+  border-color: #2c3e50; 
+}
+.modal .btn-cadastro:hover {
+  background-color: #2c3e50; 
+  color: white;
+  border-color: #2c3e50; 
+}
+
+.centralizar-texto {
+  text-align: center;
+}
+
+.estiloCons{
+  height: 450px;
+}
+
+
+.estiloSobre{
+  border-left-width: 0;
+  border-right-width: 0;
+  padding: 25px;
+}
+
+.see{
+  background-color: #dbdbdb;;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+.att{
+  background-color: rgba(255, 0, 0, 0.521);
+  margin-top: -20px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+}
+
+.contatoEstilo{
+  margin-top: 50px;
 }
