@@ -40,7 +40,7 @@
         <div>
         </div>
         <div class="botao">
-            <button class="btn btn-primary">Gerar Relatório</button>
+            <button id="btnGerarRelatorio" class="btn btn-primary">Gerar Relatório</button>
         </div>
         
     </div>
@@ -122,6 +122,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para exibir o relatório -->
+<div id="modalRelatorio" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Relatório de Comissões</h5>
+                <button type="button" id="btnRelatorioClose" class="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover" id="tabelaRelatorio"> <!-- Adicionei o ID à tabela -->
+                    <thead>
+                        <tr>
+                            <th>Vendedor</th>
+                            <th>Cargo</th>
+                            <th>Comissão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Conteúdo da tabela será carregado aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
     <div id="overlay" style="
@@ -267,7 +294,103 @@
                 .catch(error => console.error('Erro ao buscar contatos:', error));
         }
 
+        // ...
 
+
+        function carregarHTMLRelatorio() {
+    const comissoes = calcularComissoes();
+    const tabelaRelatorio = document.getElementById('tabelaRelatorio');
+
+    // Limpa o conteúdo existente na tabela
+    tabelaRelatorio.innerHTML = '';
+
+    // Adiciona as linhas da tabela com as informações de comissão
+    for (const [vendedor, { cargo, comissao }] of Object.entries(comissoes)) {
+        const newRow = tabelaRelatorio.insertRow();
+        const cellVendedor = newRow.insertCell(0);
+        const cellCargo = newRow.insertCell(1);
+        const cellComissao = newRow.insertCell(2);
+
+        cellVendedor.innerHTML = vendedor;
+        cellCargo.innerHTML = cargo;
+        cellComissao.innerHTML = comissao;
+    }
+
+    // Exibir a modal
+    const modalRelatorio = document.getElementById('modalRelatorio');
+    modalRelatorio.style.display = 'block';
+}
+
+
+    // Função para gerar o relatório
+    function gerarRelatorio() {
+        // Lógica para gerar o conteúdo do relatório
+        // Aqui você pode calcular as comissões e criar o HTML do relatório
+        const comissoes = calcularComissoes();
+
+        // Criar o HTML do relatório com as comissões calculadas
+        let relatorioHTML = '';
+
+        for (const [vendedor, { cargo, comissao }] of Object.entries(comissoes)) {
+            relatorioHTML += `
+                <tr>
+                    <td>${vendedor}</td>
+                    <td>${cargo}</td>
+                    <td>${comissao * 100}%</td>
+                </tr>
+            `;
+        }
+
+        return relatorioHTML;
+    }
+
+    // Função para calcular as comissões
+    // Função para calcular as comissões
+    function calcularComissoes() {
+    const comissaoPorcentagem = {
+        'Junior': 0.01, // 1%
+        'Pleno': 0.02,  // 2%
+        'Senior': 0.03  // 3%
+    };
+
+    // Objeto para armazenar as comissões de cada vendedor
+    const comissoes = {};
+
+    // Calcula o valor total de vendas para cada vendedor
+    clientes.forEach((cliente) => {
+        const { nomeVendedor, cargoVendedor, valorVenda } = cliente;
+
+        // Converte o valor da venda para número
+        const valorVendaNumerico = parseFloat((typeof valorVenda === 'string' ? valorVenda.replace(',', '.') : valorVenda)) || 0;
+
+        // Inicializa o valor total de vendas para esse vendedor
+        if (!comissoes[nomeVendedor]) {
+            comissoes[nomeVendedor] = { cargo: cargoVendedor, valorTotalVendas: 0, comissao: 0 };
+        }
+
+        // Soma o valor da venda ao valor total de vendas
+        comissoes[nomeVendedor].valorTotalVendas += valorVendaNumerico;
+    });
+
+    // Calcula a comissão para cada vendedor com base no valor total de vendas e cargo
+    for (const [nomeVendedor, { cargo, valorTotalVendas }] of Object.entries(comissoes)) {
+        const comissaoPorcentagemCargo = comissaoPorcentagem[cargo] || 0;
+        const comissaoValor = valorTotalVendas * comissaoPorcentagemCargo;
+
+        // Formata o valor da comissão como uma moeda brasileira
+        comissoes[nomeVendedor].comissao = comissaoValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    console.log(comissoes); // Adicionado para debug
+
+    return comissoes;
+}
+
+
+
+
+const btnGerarRelatorio = document.getElementById('btnGerarRelatorio');
+    btnGerarRelatorio.addEventListener('click', carregarHTMLRelatorio);
 
         btnAdicionar.addEventListener('click', () => toogleModal(modalAdicionar))
         btnAdicionarClose.addEventListener('click', () => toogleModal(modalAdicionar))
