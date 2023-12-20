@@ -173,6 +173,7 @@
         const btnEditarSalvar = document.getElementById('btnEditarSalvar')
         const formUpdate = document.getElementById('formUpdate')
 
+        const modalRelatorio = document.getElementById('modalRelatorio')
         const modalAdicionar = document.getElementById('modalAdicionar')
         const btnAdicionar = document.getElementById('btnAdicionar')
         const btnAdicionarClose = document.getElementById('btnAdicionarClose')
@@ -268,13 +269,14 @@
             const tabela = document.getElementById('tabela');
             tabela.innerHTML = '';
             clientes.forEach((cliente) => {
+                const valorVendaFormatado = parseFloat(cliente.valorVenda).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 tabela.innerHTML += `
                     <tr>
                         <td>${cliente.codVenda}</td>
                         <td>${cliente.nomeVendedor}</td>
                         <td>${cliente.cargoVendedor}</td>
                         <td>${cliente.codVenda}</td>
-                        <td>${cliente.valorVenda}</td>
+                        <td>${valorVendaFormatado}</td>
                         <td>
                             <button class="btn btn-primary" onclick="editarContato(${cliente.id})">Editar</button>
                             <button class="btn btn-danger" onclick="apagarContato(${cliente.id})">Apagar</button>
@@ -299,6 +301,7 @@
 
 
     function carregarHTMLRelatorio() {
+    toogleModal(modalRelatorio);
     const comissoes = calcularComissoes();
     const tabelaRelatorio = document.getElementById('tabelaRelatorio');
 
@@ -318,8 +321,8 @@
     }
 
     // Exibir a modal
-    const modalRelatorio = document.getElementById('modalRelatorio');
-    modalRelatorio.style.display = 'block';
+    //const modalRelatorio = document.getElementById('modalRelatorio');
+    //modalRelatorio.style.display = 'block';
 }
 
 
