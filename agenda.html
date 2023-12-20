@@ -176,6 +176,7 @@
         const modalAdicionar = document.getElementById('modalAdicionar')
         const btnAdicionar = document.getElementById('btnAdicionar')
         const btnAdicionarClose = document.getElementById('btnAdicionarClose')
+        const btnRelatorioClose = document.getElementById('btnRelatorioClose')
         const btnAdicionarSalvar = document.getElementById('btnAdicionarSalvar')
         const formCreate = document.getElementById('formCreate')
 
@@ -297,7 +298,7 @@
         // ...
 
 
-        function carregarHTMLRelatorio() {
+    function carregarHTMLRelatorio() {
     const comissoes = calcularComissoes();
     const tabelaRelatorio = document.getElementById('tabelaRelatorio');
 
@@ -394,6 +395,7 @@ const btnGerarRelatorio = document.getElementById('btnGerarRelatorio');
 
         btnAdicionar.addEventListener('click', () => toogleModal(modalAdicionar))
         btnAdicionarClose.addEventListener('click', () => toogleModal(modalAdicionar))
+        btnRelatorioClose.addEventListener('click', () => toogleModal(modalRelatorio))
         btnAdicionarSalvar.addEventListener('click', adicionarContato);
         formCreate.addEventListener('submit', adicionarContato)
 
