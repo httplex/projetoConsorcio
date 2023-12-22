@@ -3,12 +3,33 @@
     margin: 0;
 }
 
-body{
-    background-color: rgb(209, 223, 240);;
-}
 
 .botao{
     margin-bottom: 10px;
     text-align: center;
     font-size: 40px;
 }
+
+.table{
+    margin-top: 25px;
+}
+/* Estilo personalizado para realçar as cores da tabela */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5; /* Cor de fundo ao passar o mouse */
+  }
+  
+  /* Estilo para as células da tabela com cor de fundo alternada */
+  .table-hover tbody tr:nth-child(even) {
+    background-color:rgb(209, 223, 240); /* Cor de fundo para linhas pares */
+  }
+  
+  .table-hover tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Cor de fundo para linhas ímpares */
+  }
+  
+  /* Estilo para cabeçalho da tabela */
+  .table-hover thead th {
+    background-color:  #02028b; /* Cor de fundo para cabeçalho da tabela */
+    color: #ffffff; /* Cor do texto no cabeçalho da tabela */
+  }
+  

@@ -214,8 +214,17 @@ button{
 .bgimage {
     height: 100vh;
     position: relative;
-    background: url('imagem/inicio.jpg');
+    background: url('imagem/home.jpg');
     background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Cor preta com 50% de opacidade (ajuste conforme necessário) */
 }
 
 #sobre, 
@@ -227,24 +236,27 @@ button{
 }
 
 .heroTitle {
-  font-size: 4rem;
-  margin-top: 280px;
-  margin-left: 35px;
-  color: #02268b;
-  text-decoration: solid;
-  background-color: yellow;
-  border-radius: 10px;
-  width: 250px;
-  text-align: center;
+  font-size: 5.5rem;
 }
 
 .heroDesc {
-  font-size: 1.7rem;
-  margin-left: 40px;
-  margin-top: 5px;
-  font-weight: bold;
+  font-size: 1.6rem;
 }
 
+.heroDesc2{
+  font-size: 1.5rem;
+  
+  
+}
+
+.heroText {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
 .aboutImage {
   width: 100%;
 }
